@@ -15,6 +15,26 @@ from .base import Check, CheckContext, register_check
 
 
 @register_check
+class EmptyMesh(Check):
+    id = "empty_mesh"
+    title = "The mesh has something to check"
+    description = (
+        "Reports a mesh with no cells this tool can read. Every other check would pass on "
+        "such a mesh simply because there's nothing to inspect, which would be misleading."
+    )
+
+    def run(self, ctx: CheckContext) -> list[Finding]:
+        if ctx.mesh.n_cells:
+            return []
+        return [Finding(
+            "EMPTY_MESH", Severity.ERROR,
+            "The mesh has no cells this tool can read, so nothing could be checked.",
+            "Check that the file holds a mesh, and that its elements are linear lines, "
+            "triangles or tetrahedra.",
+        )]
+
+
+@register_check
 class DuplicatePoints(Check):
     id = "duplicate_points"
     title = "Duplicate points"

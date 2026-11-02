@@ -30,7 +30,7 @@ PROBLEMS FOUND: 2 error(s), 0 warning(s)
 |---|---|---|
 | **Tags** | A boundary or region is lost, renamed, emptied, or left partly unlabelled | `TAG_MISSING`, `TAG_EMPTY`, `TAG_UNNAMED`, `TAG_WRONG_DIMENSION`, `BOUNDARY_UNTAGGED`, `BOUNDARY_NOT_TAGGED`, `DOMAIN_UNTAGGED`, `FLOATING_FACETS` |
 | **Elements** | Inside-out, collapsed or extremely thin cells | `INVERTED_CELLS`, `DEGENERATE_CELLS`, `LOW_QUALITY_CELLS` |
-| **Connections** | Duplicate points and cells, or separate floating pieces | `DUPLICATE_POINTS`, `DUPLICATE_CELLS`, `NONMANIFOLD_FACES`, `MULTIPLE_COMPONENTS`, `ORPHAN_POINTS` |
+| **Connections** | Duplicate points and cells, or separate floating pieces | `EMPTY_MESH`, `DUPLICATE_POINTS`, `DUPLICATE_CELLS`, `NONMANIFOLD_FACES`, `MULTIPLE_COMPONENTS`, `ORPHAN_POINTS` |
 | **Surfaces** | Holes, faces pointing the wrong way, surfaces that are inside out | `OPEN_SURFACE`, `WINDING_INCONSISTENT`, `SURFACE_INVERTED`, `NONMANIFOLD_EDGES` |
 | **Sizes and units** | Volume or tag sizes that differ from what you expected, millimetre/metre mix-ups | `MEASURE_MISMATCH`, `UNIT_SCALE_MISMATCH` |
 
@@ -123,6 +123,8 @@ The automated tests also read meshes produced by **real Gmsh** in both file form
 values from an independent `trimesh` run, and switch checks off to confirm that the matching defects then
 go unnoticed. Details are in [docs/validation.md](docs/validation.md).
 
+There's also a [QA pack](qa/README.md) with 89 scenarios and 76 sample files, each run through the Python API, command line and web route. [Its first run found real bugs](qa/results/bugs-found.md), which are recorded there along with what's still open.
+
 ## What it can't do
 
 These limits are as important as the features:
@@ -151,6 +153,7 @@ These limits are as important as the features:
 | [docs/code-walkthrough.md](docs/code-walkthrough.md) | What every module does and how the pieces fit together |
 | [docs/validation.md](docs/validation.md) | How correctness is established, and what isn't covered |
 | [docs/extending.md](docs/extending.md) | How to add checks, file formats, shapes and defects |
+| [qa/](qa/README.md) | QA scenarios, sample files, and expected-against-actual results |
 | [examples/](examples/) | Runnable scripts |
 
 ## License

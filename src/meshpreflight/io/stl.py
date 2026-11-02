@@ -62,6 +62,7 @@ def parse_stl(data: bytes) -> Mesh:
         MeshFormatError: The file is neither valid binary nor ASCII STL.
     """
     corners = None
+    notes = ["STL files store no units and no tags."]
     if len(data) >= 84:
         count = struct.unpack_from("<I", data, 80)[0]
         if len(data) == 84 + 50 * count:
@@ -70,9 +71,15 @@ def parse_stl(data: bytes) -> Mesh:
         if not data.lstrip()[:5].lower() == b"solid":
             raise MeshFormatError("This is not a valid STL file.")
         corners = _parse_ascii(data)
+        # A text file cut off between triangles is otherwise indistinguishable from a whole one.
+        if b"endsolid" not in data.lower():
+            notes.append("The file has no 'endsolid' line, so it may have been cut off.")
     if not len(corners):
         raise MeshFormatError("The STL file contains no triangles.")
+    # Must come before merging, because merging rounds coordinates to whole grid positions.
+    if not np.isfinite(corners).all():
+        raise MeshFormatError("The STL file has a coordinate that is not a finite number (nan or inf).")
     points, triangles = merge_vertices(corners)
     mesh = Mesh.from_arrays(points, triangles=triangles)
-    mesh.notes.append("STL files store no units and no tags.")
+    mesh.notes.extend(notes)
     return mesh

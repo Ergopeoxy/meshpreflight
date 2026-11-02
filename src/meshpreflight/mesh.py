@@ -102,6 +102,9 @@ class Mesh:
             raise MeshError(f"points must have shape (n, 2) or (n, 3), got {points.shape}")
         if points.shape[1] == 2:
             points = np.column_stack([points, np.zeros(len(points))])
+        # A single NaN would otherwise spread through every later calculation.
+        if not np.isfinite(points).all():
+            raise MeshError("A point has a coordinate that is not a finite number (nan or inf).")
         self.points = points
         for block in self.blocks.values():
             if len(block) and (block.connectivity.min() < 0 or block.connectivity.max() >= len(points)):
@@ -184,17 +187,23 @@ class Mesh:
         """The kind of cell that forms the domain's boundary, when it is taggable."""
         return {"volume": "triangle", "planar": "line"}.get(self.domain)
 
-    def tag_id(self, name: str) -> tuple[int, int] | None:
-        """Find the ``(dimension, number)`` key of a tag name, or ``None``."""
-        for key, value in self.tag_names.items():
-            if value == name:
-                return key
-        return None
+    def tag_id(self, name: str, dim: int | None = None) -> tuple[int, int] | None:
+        """Find the ``(dimension, number)`` key of a tag name, or ``None``.
 
-    def cells_with_tag(self, name: str) -> np.ndarray:
+        One name can label several dimensions, for example a curve and a surface. Passing
+        ``dim`` prefers the match in that dimension, and otherwise falls back to any match.
+        """
+        matches = [key for key, value in self.tag_names.items() if value == name]
+        for key in matches:
+            if key[0] == dim:
+                return key
+        return matches[0] if matches else None
+
+    def cells_with_tag(self, name: str, dim: int | None = None) -> np.ndarray:
         """Connectivity of every cell carrying the named tag."""
-        key = self.tag_id(name)
-        if key is None:
+        key = self.tag_id(name, dim)
+        # Dimension 0 (named points) has no cell kind here, so it holds no cells.
+        if key is None or key[0] not in KIND_OF_DIM:
             return np.empty((0, 0), dtype=np.int64)
         kind = KIND_OF_DIM[key[0]]
         return self.cells(kind)[self.tags(kind) == key[1]]

@@ -69,7 +69,7 @@ def test_ascii_stl():
     (b"$MeshFormat\n4 0 8\n$EndMeshFormat\n", "x.msh", "not supported"),
     (b"$MeshFormat\n2.2 0 8\n$EndMeshFormat\n", "x.msh", "no \\$Nodes"),
     (b"$MeshFormat\n2.2 0 8\n$EndMeshFormat\n$Nodes\n1\n1 0 0 0\n$EndNodes\n$Elements\n1\n1 2 0 1 2 3\n$EndElements\n", "x.msh", "not in \\$Nodes"),
-    (b"\xff\xfe\x00binary", "x.msh", "binary"),
+    (b"\xff\xfe\x00binary", "x.msh", "not a Gmsh"),
     (b"garbage", "x.stl", "not a valid STL"),
 ])
 def test_bad_files_give_clear_errors(data, name, message):

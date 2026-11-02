@@ -24,3 +24,4 @@ jobs:
       - run: python -m pip install -e ".[dev]"
       - run: python -m pytest
       - run: python -m meshpreflight validate
+      - run: python qa/run_qa.py --no-write

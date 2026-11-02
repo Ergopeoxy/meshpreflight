@@ -62,11 +62,12 @@ class ExpectedMeasures(Check):
             comparisons.append(("total area", measured.area.value, expect.area, 2))
         if expect.size is not None:
             comparisons.append(("largest extent", measured.extent, expect.size, 1))
-        by_name = {row.name: row for row in measured.tags if row.name}
+        # Keyed by dimension as well, because one name can label a curve and a surface.
+        rows = {(row.dim, row.name): row for row in measured.tags if row.name}
         for tag in expect.tags:
-            if tag.measure is not None and tag.name in by_name and by_name[tag.name].cells:
-                power = max(tag.dim, 1)
-                comparisons.append((f"tag '{tag.name}'", by_name[tag.name].measure, tag.measure, power))
+            row = rows.get((tag.dim, tag.name))
+            if tag.measure is not None and row is not None and row.cells:
+                comparisons.append((f"tag '{tag.name}'", row.measure, tag.measure, max(tag.dim, 1)))
 
         findings = []
         unit_issues = []

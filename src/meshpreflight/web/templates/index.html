@@ -53,6 +53,7 @@
           <label>Largest dimension <input id="exp-size" type="number" step="any" min="0"></label>
           <label>Tolerance <input id="exp-tol" type="number" step="any" min="0" value="0.01"></label>
         </div>
+        <label class="inline"><input id="exp-allow-extra" type="checkbox"> Don't mention tags I didn't list</label>
         <div class="row"><button type="submit" class="primary">Check file</button></div>
       </form>
     </section>
@@ -87,7 +88,7 @@
         <div class="scroll"><table id="tag-table"></table></div>
         <div id="tag-plot" class="plot"></div>
       </div>
-      <div class="card">
+      <div class="card" id="quality-card">
         <h2>Element quality</h2>
         <label>Metric <select id="quality-metric"></select></label>
         <p id="quality-meaning" class="muted"></p>

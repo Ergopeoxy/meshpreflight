@@ -140,6 +140,8 @@ function renderQuality(data) {
 
 function showQualityMetric() {
   const key = $("quality-metric").value;
+  // A mesh with no cells has no scores, so the previous mesh's chart must not stay on screen.
+  $("quality-card").hidden = !key;
   if (!key) return;
   const info = qualityInfo[key];
   $("quality-meaning").textContent =
@@ -217,15 +219,27 @@ function updateDownloadLink() {
   $("demo-download").href = `/api/demo/download?${query}`;
 }
 
+/** Remove old results first, so a failed check can never appear under another file's verdict. */
+function clearResults() {
+  $("results").hidden = true;
+  $("verdict").textContent = "";
+}
+
+/** The form's own button, which works however the form was submitted. */
+function submitButton(event) {
+  return event ? event.target.querySelector('button[type="submit"]') : null;
+}
+
 async function runDemo(event) {
   if (event) event.preventDefault();
+  clearResults();
   const defect = $("demo-defect").value;
   const body = { shape: $("demo-shape").value, level: Number($("demo-level").value), defects: defect ? [defect] : [] };
   const data = await callApi("/api/demo", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
-  }, event ? event.submitter : null);
+  }, submitButton(event));
   if (data) renderResults(data);
 }
 
@@ -257,6 +271,7 @@ function addTagRow(name = "", dim = "2", size = "") {
 async function runFile(event) {
   event.preventDefault();
   const file = $("file-input").files[0];
+  clearResults();
   if (!file) return setStatus("Choose a file first.", true);
   const form = new FormData();
   form.append("file", file);
@@ -270,7 +285,8 @@ async function runFile(event) {
   form.append("area", $("exp-area").value);
   form.append("size", $("exp-size").value);
   form.append("rel_tol", $("exp-tol").value);
-  const data = await callApi("/api/analyze", { method: "POST", body: form }, event.submitter);
+  form.append("allow_extra_tags", String($("exp-allow-extra").checked));
+  const data = await callApi("/api/analyze", { method: "POST", body: form }, submitButton(event));
   if (data) renderResults(data);
 }
 

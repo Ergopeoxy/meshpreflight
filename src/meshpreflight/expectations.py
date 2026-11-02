@@ -47,6 +47,10 @@ class Expectations:
     rel_tol: float = 0.01
     allow_extra_tags: bool = False
 
+    def __post_init__(self) -> None:
+        if not self.rel_tol >= 0:
+            raise ValueError(f"The tolerance must be zero or more, got {self.rel_tol}.")
+
     @classmethod
     def build(cls, tags=None, **kwargs) -> "Expectations":
         """Create expectations from a convenient mapping.

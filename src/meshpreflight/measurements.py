@@ -161,6 +161,12 @@ def measure(mesh: Mesh) -> Measurements:
         low, high = bounding_box(mesh.points)
     else:
         low, high = np.zeros(3), np.zeros(3)
+    volume, area = measure_volume(mesh), measure_area(mesh)
+    if mesh.unsupported:
+        # Totals can't include elements that were never read, however clean the rest looks.
+        reason = f"excludes {sum(mesh.unsupported.values())} skipped element(s)"
+        volume = Measurement(volume.value, False, volume.reason or reason)
+        area = Measurement(area.value, False, area.reason or reason)
     return Measurements(
         domain=mesh.domain,
         n_points=mesh.n_points,
@@ -168,7 +174,7 @@ def measure(mesh: Mesh) -> Measurements:
         bbox_min=low.tolist(),
         bbox_max=high.tolist(),
         extent=float((high - low).max()),
-        volume=measure_volume(mesh),
-        area=measure_area(mesh),
+        volume=volume,
+        area=area,
         tags=tag_table(mesh),
     )

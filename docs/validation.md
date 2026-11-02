@@ -80,6 +80,10 @@ exercised.
 **Bad input (`tests/test_io.py`, `tests/test_web.py`).** Damaged files, unsupported versions, binary files and hostile tag
 names must all produce clear messages or inert data.
 
+## QA pack
+
+[`qa/`](../qa/README.md) adds sample files with expected results, property tests, misuse tests, a mutation check and manual web scenarios. The suite on this page tests the tool against mathematics, while the QA pack tests it as a user would, with files.
+
 ## What this doesn't establish
 
 - **Real-world detection rates.** Planted defects are simple and isolated. Real meshes fail in messier ways. The next

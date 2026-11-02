@@ -37,6 +37,7 @@
   }
 }
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 body {
   margin: 0;
   background: var(--bg);
@@ -61,6 +62,7 @@ nav { display: flex; gap: 4px; overflow-x: auto; }
 .muted { color: var(--muted); font-size: .92rem; }
 .row { display: flex; flex-wrap: wrap; gap: 14px; align-items: flex-end; margin-top: 12px; }
 label { display: flex; flex-direction: column; gap: 4px; font-size: .9rem; font-weight: 600; }
+label.inline { flex-direction: row; align-items: center; gap: 8px; margin-top: 12px; font-weight: 400; }
 input, select {
   font: inherit; font-weight: 400; padding: 7px 9px; color: var(--text); background: var(--bg);
   border: 1px solid var(--line); border-radius: 6px; min-width: 0; max-width: 100%;

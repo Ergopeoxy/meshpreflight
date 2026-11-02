@@ -17,6 +17,9 @@ from .io import MeshFormatError
 from .shapes import SHAPES, get_shape
 from .validation import run_validation, summarize
 
+#: Each level multiplies the cell count by about 8 for a solid, so this is already over 1.5 million.
+MAX_DEMO_LEVEL = 6
+
 
 def _parse_tag(text: str) -> tuple[str, tuple[int, float | None]]:
     """Read ``NAME:DIM`` or ``NAME:DIM:SIZE``, such as ``inlet:2:3.14``."""
@@ -29,6 +32,17 @@ def _parse_tag(text: str) -> tuple[str, tuple[int, float | None]]:
         raise argparse.ArgumentTypeError(f"Bad tag {text!r}: {error}") from error
 
 
+def _level(text: str) -> int:
+    """A refinement level. The upper limit stops one typo from exhausting the computer's memory."""
+    try:
+        level = int(text)
+    except ValueError:
+        raise argparse.ArgumentTypeError(f"Level must be a whole number, got {text!r}") from None
+    if not 1 <= level <= MAX_DEMO_LEVEL:
+        raise argparse.ArgumentTypeError(f"Level must be between 1 and {MAX_DEMO_LEVEL}, got {level}")
+    return level
+
+
 def _command_check(args: argparse.Namespace) -> int:
     report = preflight(
         args.file,
@@ -37,6 +51,7 @@ def _command_check(args: argparse.Namespace) -> int:
         expected_area=args.area,
         expected_size=args.size,
         rel_tol=args.tolerance,
+        allow_extra_tags=args.allow_extra_tags,
     )
     print(report.to_json() if args.json else report.to_text())
     if args.plot:
@@ -93,13 +108,14 @@ def build_parser() -> argparse.ArgumentParser:
     check.add_argument("--area", type=float, help="expected total area")
     check.add_argument("--size", type=float, help="expected largest extent, useful for catching unit mistakes")
     check.add_argument("--tolerance", type=float, default=0.01, help="relative tolerance for sizes (default 0.01)")
+    check.add_argument("--allow-extra-tags", action="store_true", help="don't mention tags you didn't list")
     check.add_argument("--json", action="store_true", help="print JSON instead of text")
     check.add_argument("--plot", metavar="FILE.html", help="save an interactive 3D view")
     check.set_defaults(run=_command_check)
 
     demo = commands.add_parser("demo", help="check a built-in shape, optionally damaged")
     demo.add_argument("shape", choices=sorted(SHAPES))
-    demo.add_argument("--level", type=int, default=2, help="refinement level (default 2)")
+    demo.add_argument("--level", type=_level, default=2, help="refinement level (default 2)")
     demo.add_argument("--defect", action="append", choices=sorted(DEFECTS), help="plant a defect; can be repeated")
     demo.add_argument("--seed", type=int, default=0, help="which cells the defect damages")
     demo.set_defaults(run=_command_demo)
@@ -121,7 +137,7 @@ def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     try:
         return args.run(args)
-    except (MeshFormatError, FileNotFoundError, ValueError, ImportError) as error:
+    except (MeshFormatError, OSError, ValueError, ImportError) as error:
         print(f"Error: {error}", file=sys.stderr)
         return 2
 

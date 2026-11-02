@@ -1,0 +1,3 @@
+# Sample meshes are test data. Their exact bytes matter (one tests Windows line endings and
+# others are binary), so Git must never convert them.
+qa/samples/** -text

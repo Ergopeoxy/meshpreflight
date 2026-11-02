@@ -55,7 +55,7 @@ class ExpectedTags(Check):
         findings = []
         rows = {(row.dim, row.name): row for row in tag_table(mesh) if row.name}
         for tag in ctx.expect.tags:
-            key = mesh.tag_id(tag.name)
+            key = mesh.tag_id(tag.name, tag.dim)
             if key is None:
                 findings.append(Finding(
                     "TAG_MISSING", Severity.ERROR,
@@ -71,6 +71,10 @@ class ExpectedTags(Check):
                     "Check that the physical group was defined on the right kind of entity.",
                     count=1,
                 ))
+            elif tag.dim == 0:
+                # Named points carry no cell or size in this library, so the name is all
+                # that can be confirmed. Calling it "empty" would be a false alarm.
+                continue
             elif (tag.dim, tag.name) not in rows or rows[(tag.dim, tag.name)].cells == 0:
                 findings.append(Finding(
                     "TAG_EMPTY", Severity.ERROR,

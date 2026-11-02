@@ -19,6 +19,7 @@ tag names from files using ``textContent`` so a crafted file cannot inject a scr
 from __future__ import annotations
 
 import json
+import math
 from importlib.util import find_spec
 from pathlib import Path
 
@@ -28,7 +29,7 @@ from ..checks import CHECK_REGISTRY
 from ..core import Preflight
 from ..defects import DEFECTS, apply_defect
 from ..expectations import Expectations, TagExpectation
-from ..io import MeshFormatError, parse_mesh, write_msh22
+from ..io import parse_mesh, write_msh22
 from ..report import Report
 from ..shapes import SHAPES, get_shape
 from ..validation import convergence_studies, demonstrate_lost_tag, run_validation, summarize
@@ -59,26 +60,48 @@ def _result(report: Report, expect: Expectations) -> dict:
 
 def _parse_expectations(form) -> Expectations:
     """Read the expectations form. Raises ``ValueError`` on bad input."""
+    def finite(value, label: str) -> float:
+        try:
+            result = float(value)
+        except (TypeError, ValueError):
+            raise ValueError(f"{label} must be a number, got {value!r}.") from None
+        if not math.isfinite(result):
+            raise ValueError(f"{label} must be a finite number, got {value!r}.")
+        return result
+
     def number(key: str) -> float | None:
         value = (form.get(key) or "").strip()
-        return float(value) if value else None
+        return finite(value, key) if value else None
+
+    try:
+        items = json.loads(form.get("tags") or "[]")
+    except json.JSONDecodeError:
+        raise ValueError("The list of expected tags isn't valid JSON.") from None
+    if not isinstance(items, list) or not all(isinstance(item, dict) for item in items):
+        raise ValueError("The list of expected tags must be a list of objects.")
 
     tags = []
-    for item in json.loads(form.get("tags") or "[]"):
+    for item in items:
         name = str(item.get("name", "")).strip()
         if not name:
             continue
+        dim = item.get("dim", 2)
+        if dim not in (0, 1, 2, 3):
+            raise ValueError(f"The dimension of tag '{name}' must be 0, 1, 2 or 3.")
         size = item.get("measure")
-        tags.append(TagExpectation(name, int(item.get("dim", 2)),
-                                   float(size) if size not in (None, "") else None))
+        tags.append(TagExpectation(name, int(dim), finite(size, f"The size of tag '{name}'") if size not in (None, "") else None))
     tolerance = number("rel_tol")
     return Expectations(tags=tags, volume=number("volume"), area=number("area"), size=number("size"),
-                        rel_tol=tolerance if tolerance is not None else 0.01)
+                        rel_tol=tolerance if tolerance is not None else 0.01,
+                        allow_extra_tags=form.get("allow_extra_tags") == "true")
 
 
 def _level(value) -> int:
     """Refinement level from user input, kept in a range that can't exhaust the machine."""
-    level = int(value)
+    try:
+        level = int(value)
+    except (TypeError, ValueError):
+        raise ValueError(f"Level must be a whole number, got {value!r}.") from None
     if not MIN_LEVEL <= level <= MAX_LEVEL:
         raise ValueError(f"Level must be between {MIN_LEVEL} and {MAX_LEVEL}.")
     return level
@@ -100,6 +123,11 @@ def create_app() -> Flask:
     def too_large(_error):
         limit = MAX_UPLOAD_BYTES // (1024 * 1024)
         return jsonify({"error": f"That file is larger than the {limit} MB limit."}), 413
+
+    @app.errorhandler(500)
+    def unexpected(_error):
+        # A failure should show the page's normal message, and never a stack trace.
+        return jsonify({"error": "Something went wrong inside the tool. This is a bug, so please report it."}), 500
 
     @app.get("/")
     def index():
@@ -134,19 +162,25 @@ def create_app() -> Flask:
         if upload is None or not upload.filename:
             raise ValueError("Choose a .msh or .stl file first.")
         mesh = parse_mesh(upload.read(), upload.filename)
-        if not mesh.n_cells:
-            raise MeshFormatError("That file contains no cells this tool can read.")
         expect = _parse_expectations(request.form)
         return jsonify(_result(checker.run(mesh, expect), expect))
 
     @app.post("/api/demo")
     def demo():
-        body = request.get_json(force=True, silent=True) or {}
+        body = request.get_json(force=True, silent=True)
+        if not isinstance(body, dict):
+            raise ValueError("The request must be a JSON object.")
+        defects = body.get("defects", [])
+        if not isinstance(defects, list):
+            raise ValueError("'defects' must be a list of defect names.")
+        seed = body.get("seed", 0)
+        if not isinstance(seed, int):
+            raise ValueError("'seed' must be a whole number.")
         shape = get_shape(str(body.get("shape", "cylinder")))
         level = _level(body.get("level", 2))
         mesh = shape.mesh(level)
-        for name in body.get("defects", []):
-            mesh = apply_defect(mesh, str(name), int(body.get("seed", 0)))
+        for name in defects:
+            mesh = apply_defect(mesh, str(name), seed)
         expect = shape.expectations(level)
         result = _result(checker.run(mesh, expect), expect)
         result["expected"] = {

@@ -1,0 +1,2307 @@
+[
+ {
+  "id": "VAL-01",
+  "area": "Valid files",
+  "title": "Single tetrahedron, format 2.2",
+  "file": "valid/unit_tet_v22.msh",
+  "why": "Smallest possible solid. Volume = 1/6 from the formula base x height / 3.",
+  "input": {},
+  "expected": {
+   "status": "no_problems_found",
+   "findings": [],
+   "domain": "volume",
+   "n_points": 4,
+   "n_cells": {
+    "tetra": 1
+   },
+   "volume": {
+    "value": 0.16666666666666666,
+    "rel": 1e-09,
+    "trusted": true
+   },
+   "area": {
+    "value": 2.3660254037844384,
+    "rel": 1e-09
+   },
+   "extent": {
+    "value": 1,
+    "rel": 1e-09
+   }
+  }
+ },
+ {
+  "id": "VAL-02",
+  "area": "Valid files",
+  "title": "Single tetrahedron, format 4.1, node numbers 10, 20, 30, 40",
+  "file": "valid/unit_tet_v41_sparse_nodes.msh",
+  "why": "Node numbers in files needn't be consecutive. A reader that assumes they are gets a wrong mesh.",
+  "input": {},
+  "expected": {
+   "status": "no_problems_found",
+   "findings": [],
+   "domain": "volume",
+   "n_points": 4,
+   "n_cells": {
+    "tetra": 1
+   },
+   "volume": {
+    "value": 0.16666666666666666,
+    "rel": 1e-09,
+    "trusted": true
+   },
+   "area": {
+    "value": 2.3660254037844384,
+    "rel": 1e-09
+   }
+  }
+ },
+ {
+  "id": "VAL-03",
+  "area": "Valid files",
+  "title": "unit square 2d",
+  "file": "valid/unit_square_2d.msh",
+  "why": "2D unit square with four named sides. Area and each side length are 1.",
+  "input": {
+   "tags": {
+    "bottom": [
+     1,
+     1
+    ],
+    "right": [
+     1,
+     1
+    ],
+    "top": [
+     1,
+     1
+    ],
+    "left": [
+     1,
+     1
+    ],
+    "domain": [
+     2,
+     1
+    ]
+   },
+   "area": 1
+  },
+  "expected": {
+   "status": "no_problems_found",
+   "findings": [],
+   "domain": "planar",
+   "n_points": 4,
+   "n_cells": {
+    "line": 4,
+    "triangle": 2
+   },
+   "area": {
+    "value": 1,
+    "rel": 1e-09
+   },
+   "tags": [
+    {
+     "name": "bottom",
+     "dim": 1,
+     "cells": 1,
+     "measure": 1,
+     "rel": 1e-09
+    },
+    {
+     "name": "right",
+     "dim": 1,
+     "cells": 1,
+     "measure": 1,
+     "rel": 1e-09
+    },
+    {
+     "name": "top",
+     "dim": 1,
+     "cells": 1,
+     "measure": 1,
+     "rel": 1e-09
+    },
+    {
+     "name": "left",
+     "dim": 1,
+     "cells": 1,
+     "measure": 1,
+     "rel": 1e-09
+    },
+    {
+     "name": "domain",
+     "dim": 2,
+     "cells": 2,
+     "measure": 1,
+     "rel": 1e-09
+    }
+   ]
+  }
+ },
+ {
+  "id": "VAL-04",
+  "area": "Valid files",
+  "title": "unit square at z5",
+  "file": "valid/unit_square_at_z5.msh",
+  "why": "The same square at height z = 5. A flat mesh needn't sit at z = 0.",
+  "input": {
+   "tags": {
+    "bottom": [
+     1,
+     1
+    ],
+    "right": [
+     1,
+     1
+    ],
+    "top": [
+     1,
+     1
+    ],
+    "left": [
+     1,
+     1
+    ],
+    "domain": [
+     2,
+     1
+    ]
+   },
+   "area": 1
+  },
+  "expected": {
+   "status": "no_problems_found",
+   "findings": [],
+   "domain": "planar",
+   "n_points": 4,
+   "n_cells": {
+    "line": 4,
+    "triangle": 2
+   },
+   "area": {
+    "value": 1,
+    "rel": 1e-09
+   },
+   "tags": [
+    {
+     "name": "bottom",
+     "dim": 1,
+     "cells": 1,
+     "measure": 1,
+     "rel": 1e-09
+    },
+    {
+     "name": "right",
+     "dim": 1,
+     "cells": 1,
+     "measure": 1,
+     "rel": 1e-09
+    },
+    {
+     "name": "top",
+     "dim": 1,
+     "cells": 1,
+     "measure": 1,
+     "rel": 1e-09
+    },
+    {
+     "name": "left",
+     "dim": 1,
+     "cells": 1,
+     "measure": 1,
+     "rel": 1e-09
+    },
+    {
+     "name": "domain",
+     "dim": 2,
+     "cells": 2,
+     "measure": 1,
+     "rel": 1e-09
+    }
+   ]
+  }
+ },
+ {
+  "id": "VAL-05",
+  "area": "Valid files",
+  "title": "unit square crlf",
+  "file": "valid/unit_square_crlf.msh",
+  "why": "The same square saved with Windows line endings.",
+  "input": {
+   "tags": {
+    "bottom": [
+     1,
+     1
+    ],
+    "right": [
+     1,
+     1
+    ],
+    "top": [
+     1,
+     1
+    ],
+    "left": [
+     1,
+     1
+    ],
+    "domain": [
+     2,
+     1
+    ]
+   },
+   "area": 1
+  },
+  "expected": {
+   "status": "no_problems_found",
+   "findings": [],
+   "domain": "planar",
+   "n_points": 4,
+   "n_cells": {
+    "line": 4,
+    "triangle": 2
+   },
+   "area": {
+    "value": 1,
+    "rel": 1e-09
+   },
+   "tags": [
+    {
+     "name": "bottom",
+     "dim": 1,
+     "cells": 1,
+     "measure": 1,
+     "rel": 1e-09
+    },
+    {
+     "name": "right",
+     "dim": 1,
+     "cells": 1,
+     "measure": 1,
+     "rel": 1e-09
+    },
+    {
+     "name": "top",
+     "dim": 1,
+     "cells": 1,
+     "measure": 1,
+     "rel": 1e-09
+    },
+    {
+     "name": "left",
+     "dim": 1,
+     "cells": 1,
+     "measure": 1,
+     "rel": 1e-09
+    },
+    {
+     "name": "domain",
+     "dim": 2,
+     "cells": 2,
+     "measure": 1,
+     "rel": 1e-09
+    }
+   ]
+  }
+ },
+ {
+  "id": "VAL-06",
+  "area": "Valid files",
+  "title": "Two tetrahedra sharing a face, with tags",
+  "file": "valid/two_tets_tagged.msh",
+  "why": "Volume = 1/6 + 1/3 = 1/2. The shared face is inside, so only 6 faces make up the outer boundary.",
+  "input": {
+   "tags": {
+    "outer": [
+     2,
+     4.098076211353316
+    ],
+    "solid": [
+     3,
+     0.5
+    ]
+   },
+   "volume": 0.5,
+   "area": 4.098076211353316
+  },
+  "expected": {
+   "status": "no_problems_found",
+   "findings": [],
+   "domain": "volume",
+   "n_points": 5,
+   "volume": {
+    "value": 0.5,
+    "rel": 1e-09,
+    "trusted": true
+   },
+   "area": {
+    "value": 4.098076211353316,
+    "rel": 1e-09
+   },
+   "tags": [
+    {
+     "name": "outer",
+     "dim": 2,
+     "cells": 6,
+     "measure": 4.098076211353316,
+     "rel": 1e-09
+    },
+    {
+     "name": "solid",
+     "dim": 3,
+     "cells": 2,
+     "measure": 0.5,
+     "rel": 1e-09
+    }
+   ]
+  }
+ },
+ {
+  "id": "VAL-07",
+  "area": "Valid files",
+  "title": "Two materials with a tagged interface",
+  "file": "valid/two_materials_interface.msh",
+  "why": "An inner face may be tagged, for example as the boundary between steel and copper. It must not be called an error.",
+  "input": {
+   "tags": {
+    "outer": [
+     2,
+     4.098076211353316
+    ],
+    "interface": [
+     2,
+     0.8660254037844386
+    ],
+    "steel": [
+     3,
+     0.16666666666666666
+    ],
+    "copper": [
+     3,
+     0.3333333333333333
+    ]
+   }
+  },
+  "expected": {
+   "status": "no_problems_found",
+   "findings": [],
+   "tags": [
+    {
+     "name": "interface",
+     "dim": 2,
+     "cells": 1,
+     "measure": 0.8660254037844386,
+     "rel": 1e-09
+    },
+    {
+     "name": "steel",
+     "dim": 3,
+     "cells": 1,
+     "measure": 0.16666666666666666,
+     "rel": 1e-09
+    },
+    {
+     "name": "copper",
+     "dim": 3,
+     "cells": 1,
+     "measure": 0.3333333333333333,
+     "rel": 1e-09
+    }
+   ]
+  }
+ },
+ {
+  "id": "VAL-08",
+  "area": "Valid files",
+  "title": "Tag names with spaces and an accent",
+  "file": "valid/name_with_spaces_unicode.msh",
+  "why": "Real projects use names like 'cold wall'. Names must arrive unchanged.",
+  "input": {
+   "tags": {
+    "cold wall é": [
+     1,
+     1
+    ],
+    "the domain": [
+     2,
+     1
+    ],
+    "right": [
+     1,
+     1
+    ],
+    "top": [
+     1,
+     1
+    ],
+    "left": [
+     1,
+     1
+    ]
+   }
+  },
+  "expected": {
+   "status": "no_problems_found",
+   "findings": [],
+   "tags": [
+    {
+     "name": "cold wall é",
+     "dim": 1,
+     "cells": 1,
+     "measure": 1,
+     "rel": 1e-09
+    },
+    {
+     "name": "the domain",
+     "dim": 2,
+     "cells": 2,
+     "measure": 1,
+     "rel": 1e-09
+    }
+   ]
+  }
+ },
+ {
+  "id": "VAL-09",
+  "area": "Valid files",
+  "title": "Tag name saved in an older text encoding",
+  "file": "valid/name_latin1_encoded.msh",
+  "why": "Older tools on Windows may save accents as Latin-1, not UTF-8. This must not be mistaken for a binary file.",
+  "input": {
+   "tags": {
+    "paroi é": [
+     1,
+     1
+    ]
+   },
+   "allow_extra_tags": true
+  },
+  "expected": {
+   "status": "no_problems_found",
+   "findings": [],
+   "tags": [
+    {
+     "name": "paroi é",
+     "dim": 1,
+     "cells": 1,
+     "measure": 1,
+     "rel": 1e-09
+    }
+   ]
+  }
+ },
+ {
+  "id": "VAL-10",
+  "area": "Valid files",
+  "title": "One name used in two dimensions",
+  "file": "valid/same_name_two_dimensions.msh",
+  "why": "Gmsh identifies a group by (dimension, number), so one name can label a curve and a surface. Asking for the surface must find the surface.",
+  "input": {
+   "tags": {
+    "outer": [
+     2,
+     4.098076211353316
+    ],
+    "solid": [
+     3,
+     0.5
+    ]
+   }
+  },
+  "expected": {
+   "status": "no_problems_found",
+   "findings": [],
+   "tags": [
+    {
+     "name": "outer",
+     "dim": 2,
+     "cells": 6,
+     "measure": 4.098076211353316,
+     "rel": 1e-09
+    },
+    {
+     "name": "outer",
+     "dim": 1,
+     "cells": 1,
+     "measure": 1,
+     "rel": 1e-09
+    }
+   ]
+  }
+ },
+ {
+  "id": "VAL-11",
+  "area": "Valid files",
+  "title": "One tag number used in two dimensions",
+  "file": "valid/same_number_two_dimensions.msh",
+  "why": "Number 1 is both a surface and a solid here, which is valid because the dimension is part of the key.",
+  "input": {
+   "tags": {
+    "outer": [
+     2,
+     4.098076211353316
+    ],
+    "solid": [
+     3,
+     0.5
+    ]
+   }
+  },
+  "expected": {
+   "status": "no_problems_found",
+   "findings": [],
+   "tags": [
+    {
+     "name": "outer",
+     "dim": 2,
+     "cells": 6,
+     "measure": 4.098076211353316,
+     "rel": 1e-09
+    },
+    {
+     "name": "solid",
+     "dim": 3,
+     "cells": 2,
+     "measure": 0.5,
+     "rel": 1e-09
+    }
+   ]
+  }
+ },
+ {
+  "id": "VAL-12",
+  "area": "Valid files",
+  "title": "A named single point",
+  "file": "valid/point_physical_group.msh",
+  "why": "Points can be named too, for example to fix one corner. A point has no size, but it must not be reported as empty.",
+  "input": {
+   "tags": {
+    "bottom": [
+     1,
+     1
+    ],
+    "right": [
+     1,
+     1
+    ],
+    "top": [
+     1,
+     1
+    ],
+    "left": [
+     1,
+     1
+    ],
+    "domain": [
+     2,
+     1
+    ],
+    "corner": [
+     0,
+     null
+    ]
+   }
+  },
+  "expected": {
+   "status": "no_problems_found",
+   "findings": []
+  }
+ },
+ {
+  "id": "VAL-13",
+  "area": "Valid files",
+  "title": "octahedron ascii",
+  "file": "valid/octahedron_ascii.stl",
+  "why": "Eight-sided closed solid. Volume = 4/3, area = 4 sqrt(3). STL stores separate copies of corners, which must be joined.",
+  "input": {
+   "volume": 1.3333333333333333,
+   "area": 6.928203230275509
+  },
+  "expected": {
+   "status": "no_problems_found",
+   "findings": [],
+   "domain": "surface",
+   "n_points": 6,
+   "n_cells": {
+    "triangle": 8
+   },
+   "volume": {
+    "value": 1.3333333333333333,
+    "rel": 1e-06,
+    "trusted": true
+   },
+   "area": {
+    "value": 6.928203230275509,
+    "rel": 1e-06
+   },
+   "notes_contain": "no units"
+  }
+ },
+ {
+  "id": "VAL-14",
+  "area": "Valid files",
+  "title": "octahedron binary",
+  "file": "valid/octahedron_binary.stl",
+  "why": "The same shape in binary STL.",
+  "input": {
+   "volume": 1.3333333333333333,
+   "area": 6.928203230275509
+  },
+  "expected": {
+   "status": "no_problems_found",
+   "findings": [],
+   "domain": "surface",
+   "n_points": 6,
+   "n_cells": {
+    "triangle": 8
+   },
+   "volume": {
+    "value": 1.3333333333333333,
+    "rel": 1e-06,
+    "trusted": true
+   },
+   "area": {
+    "value": 6.928203230275509,
+    "rel": 1e-06
+   },
+   "notes_contain": "no units"
+  }
+ },
+ {
+  "id": "VAL-15",
+  "area": "Valid files",
+  "title": "octahedron binary header says solid",
+  "file": "valid/octahedron_binary_header_says_solid.stl",
+  "why": "Binary STL whose header begins with 'solid', the keyword of text STL. Many CAD tools do this.",
+  "input": {
+   "volume": 1.3333333333333333,
+   "area": 6.928203230275509
+  },
+  "expected": {
+   "status": "no_problems_found",
+   "findings": [],
+   "domain": "surface",
+   "n_points": 6,
+   "n_cells": {
+    "triangle": 8
+   },
+   "volume": {
+    "value": 1.3333333333333333,
+    "rel": 1e-06,
+    "trusted": true
+   },
+   "area": {
+    "value": 6.928203230275509,
+    "rel": 1e-06
+   },
+   "notes_contain": "no units"
+  }
+ },
+ {
+  "id": "VAL-16",
+  "area": "Valid files",
+  "title": "Cube with sides of 10",
+  "file": "valid/cube_10mm.stl",
+  "why": "Volume = 1000, area = 600.",
+  "input": {
+   "volume": 1000,
+   "area": 600,
+   "size": 10
+  },
+  "expected": {
+   "status": "no_problems_found",
+   "findings": [],
+   "domain": "surface",
+   "n_points": 8,
+   "n_cells": {
+    "triangle": 12
+   },
+   "volume": {
+    "value": 1000,
+    "rel": 1e-09,
+    "trusted": true
+   },
+   "area": {
+    "value": 600,
+    "rel": 1e-09
+   },
+   "extent": {
+    "value": 10,
+    "rel": 1e-09
+   }
+  }
+ },
+ {
+  "id": "VAL-17",
+  "area": "Valid files",
+  "title": "Only line cells",
+  "file": "valid/lines_only.msh",
+  "why": "Not a solid or surface, so most checks can't apply. Reports must list them as skipped and must not invent a volume.",
+  "input": {},
+  "expected": {
+   "status": "no_problems_found",
+   "findings": [],
+   "domain": "curve",
+   "volume": {
+    "value": null,
+    "trusted": false
+   },
+   "skipped": [
+    "boundary_coverage",
+    "inverted_cells",
+    "surface_closed"
+   ]
+  }
+ },
+ {
+  "id": "VAL-18",
+  "area": "Valid files",
+  "title": "Points listed out of order",
+  "file": "valid/two_tets_shuffled_node_order.msh",
+  "why": "Files may list points in any order. Reading by position instead of by number would scramble the shape. The right answer is the same as VAL-06: volume 1/2.",
+  "input": {},
+  "expected": {
+   "status": "no_problems_found",
+   "findings": [],
+   "n_points": 5,
+   "volume": {
+    "value": 0.5,
+    "rel": 1e-09,
+    "trusted": true
+   },
+   "area": {
+    "value": 4.098076211353316,
+    "rel": 1e-09
+   }
+  }
+ },
+ {
+  "id": "GMS-01",
+  "area": "Real Gmsh files",
+  "title": "Cylinder from real Gmsh, v22",
+  "file": "gmsh/cylinder_v22.msh",
+  "why": "Radius 1, height 4. Inlet area = pi, wall area = 8 pi, volume = 4 pi, within the faceting tolerance.",
+  "input": {
+   "tags": {
+    "inlet": [
+     2,
+     3.141592653589793
+    ],
+    "outlet": [
+     2,
+     3.141592653589793
+    ],
+    "wall": [
+     2,
+     25.132741228718345
+    ],
+    "fluid": [
+     3,
+     12.566370614359172
+    ]
+   },
+   "volume": 12.566370614359172,
+   "rel_tol": 0.08
+  },
+  "expected": {
+   "status": "no_problems_found",
+   "findings": [],
+   "domain": "volume",
+   "volume": {
+    "value": 12.566370614359172,
+    "rel": 0.08,
+    "trusted": true
+   },
+   "area": {
+    "value": 31.41592653589793,
+    "rel": 0.08
+   },
+   "tags": [
+    {
+     "name": "inlet",
+     "dim": 2,
+     "cells": null,
+     "measure": 3.141592653589793,
+     "rel": 0.08
+    },
+    {
+     "name": "outlet",
+     "dim": 2,
+     "cells": null,
+     "measure": 3.141592653589793,
+     "rel": 0.08
+    },
+    {
+     "name": "wall",
+     "dim": 2,
+     "cells": null,
+     "measure": 25.132741228718345,
+     "rel": 0.08
+    },
+    {
+     "name": "fluid",
+     "dim": 3,
+     "cells": null,
+     "measure": 12.566370614359172,
+     "rel": 0.08
+    }
+   ]
+  }
+ },
+ {
+  "id": "GMS-02",
+  "area": "Real Gmsh files",
+  "title": "Cylinder from real Gmsh, v41",
+  "file": "gmsh/cylinder_v41.msh",
+  "why": "Radius 1, height 4. Inlet area = pi, wall area = 8 pi, volume = 4 pi, within the faceting tolerance.",
+  "input": {
+   "tags": {
+    "inlet": [
+     2,
+     3.141592653589793
+    ],
+    "outlet": [
+     2,
+     3.141592653589793
+    ],
+    "wall": [
+     2,
+     25.132741228718345
+    ],
+    "fluid": [
+     3,
+     12.566370614359172
+    ]
+   },
+   "volume": 12.566370614359172,
+   "rel_tol": 0.08
+  },
+  "expected": {
+   "status": "no_problems_found",
+   "findings": [],
+   "domain": "volume",
+   "volume": {
+    "value": 12.566370614359172,
+    "rel": 0.08,
+    "trusted": true
+   },
+   "area": {
+    "value": 31.41592653589793,
+    "rel": 0.08
+   },
+   "tags": [
+    {
+     "name": "inlet",
+     "dim": 2,
+     "cells": null,
+     "measure": 3.141592653589793,
+     "rel": 0.08
+    },
+    {
+     "name": "outlet",
+     "dim": 2,
+     "cells": null,
+     "measure": 3.141592653589793,
+     "rel": 0.08
+    },
+    {
+     "name": "wall",
+     "dim": 2,
+     "cells": null,
+     "measure": 25.132741228718345,
+     "rel": 0.08
+    },
+    {
+     "name": "fluid",
+     "dim": 3,
+     "cells": null,
+     "measure": 12.566370614359172,
+     "rel": 0.08
+    }
+   ]
+  }
+ },
+ {
+  "id": "GMS-03",
+  "area": "Real Gmsh files",
+  "title": "Plate with a round hole",
+  "file": "gmsh/plate_with_hole_v41.msh",
+  "why": "2D area = 1 - pi x 0.2^2 = 0.8743. The hole is a second boundary, and it must not be reported as a defect.",
+  "input": {
+   "tags": {
+    "outer": [
+     1,
+     4
+    ],
+    "hole": [
+     1,
+     1.2566370614359172
+    ],
+    "plate": [
+     2,
+     0.8743362938564083
+    ]
+   },
+   "rel_tol": 0.01
+  },
+  "expected": {
+   "status": "no_problems_found",
+   "findings": [],
+   "domain": "planar",
+   "area": {
+    "value": 0.8743362938564083,
+    "rel": 0.01
+   },
+   "tags": [
+    {
+     "name": "outer",
+     "dim": 1,
+     "cells": null,
+     "measure": 4,
+     "rel": 1e-06
+    },
+    {
+     "name": "hole",
+     "dim": 1,
+     "cells": null,
+     "measure": 1.2566370614359172,
+     "rel": 0.01
+    },
+    {
+     "name": "plate",
+     "dim": 2,
+     "cells": null,
+     "measure": 0.8743362938564083,
+     "rel": 0.01
+    }
+   ]
+  }
+ },
+ {
+  "id": "GMS-04",
+  "area": "Real Gmsh files",
+  "title": "Two joined blocks of different material",
+  "file": "gmsh/two_material_blocks_v41.msh",
+  "why": "Two unit cubes side by side. Each volume = 1, interface = 1, outside = 10. These are flat-sided, so the match must be exact.",
+  "input": {
+   "tags": {
+    "steel": [
+     3,
+     1
+    ],
+    "copper": [
+     3,
+     1
+    ],
+    "interface": [
+     2,
+     1
+    ],
+    "outside": [
+     2,
+     10
+    ]
+   },
+   "volume": 2,
+   "area": 10
+  },
+  "expected": {
+   "status": "no_problems_found",
+   "findings": [],
+   "domain": "volume",
+   "volume": {
+    "value": 2,
+    "rel": 1e-09,
+    "trusted": true
+   },
+   "area": {
+    "value": 10,
+    "rel": 1e-09
+   },
+   "tags": [
+    {
+     "name": "steel",
+     "dim": 3,
+     "cells": null,
+     "measure": 1,
+     "rel": 1e-09
+    },
+    {
+     "name": "copper",
+     "dim": 3,
+     "cells": null,
+     "measure": 1,
+     "rel": 1e-09
+    },
+    {
+     "name": "interface",
+     "dim": 2,
+     "cells": null,
+     "measure": 1,
+     "rel": 1e-09
+    },
+    {
+     "name": "outside",
+     "dim": 2,
+     "cells": null,
+     "measure": 10,
+     "rel": 1e-09
+    }
+   ]
+  }
+ },
+ {
+  "id": "GMS-05",
+  "area": "Real Gmsh files",
+  "title": "Sphere surface exported by Gmsh as STL",
+  "file": "gmsh/sphere_surface.stl",
+  "why": "Radius 1: volume = 4/3 pi, area = 4 pi. Tests corner joining on a real export of over a thousand triangles.",
+  "input": {
+   "volume": 4.1887902047863905,
+   "area": 12.566370614359172,
+   "rel_tol": 0.02
+  },
+  "expected": {
+   "status": "no_problems_found",
+   "findings": [],
+   "domain": "surface",
+   "volume": {
+    "value": 4.1887902047863905,
+    "rel": 0.02,
+    "trusted": true
+   },
+   "area": {
+    "value": 12.566370614359172,
+    "rel": 0.02
+   }
+  }
+ },
+ {
+  "id": "GMS-06",
+  "area": "Real Gmsh files",
+  "title": "Gmsh mesh saved without any physical groups",
+  "file": "gmsh/cylinder_no_physical_groups.msh",
+  "why": "A common beginner mistake. The geometry is fine, but no region has a name, so a solver can't apply boundary conditions.",
+  "input": {
+   "tags": {
+    "inlet": [
+     2,
+     null
+    ],
+    "outlet": [
+     2,
+     null
+    ],
+    "wall": [
+     2,
+     null
+    ],
+    "fluid": [
+     3,
+     null
+    ]
+   }
+  },
+  "expected": {
+   "status": "errors",
+   "findings": [
+    "TAG_MISSING",
+    "DOMAIN_UNTAGGED",
+    "BOUNDARY_NOT_TAGGED"
+   ]
+  }
+ },
+ {
+  "id": "GMS-07",
+  "area": "Real Gmsh files",
+  "title": "Checking a subset of tags and allowing others",
+  "file": "gmsh/cylinder_v41.msh",
+  "why": "A user may only care about one tag. With extra tags allowed, the others must not even be mentioned.",
+  "input": {
+   "tags": {
+    "inlet": [
+     2,
+     null
+    ]
+   },
+   "allow_extra_tags": true
+  },
+  "expected": {
+   "status": "no_problems_found",
+   "findings": []
+  }
+ },
+ {
+  "id": "GMS-08",
+  "area": "Real Gmsh files",
+  "title": "Checking a subset of tags with others not allowed",
+  "file": "gmsh/cylinder_v41.msh",
+  "why": "By default, tags you didn't list are mentioned as information. This isn't a problem, so the status stays clean.",
+  "input": {
+   "tags": {
+    "inlet": [
+     2,
+     null
+    ]
+   }
+  },
+  "expected": {
+   "status": "no_problems_found",
+   "findings": [
+    "TAG_UNEXPECTED"
+   ]
+  }
+ },
+ {
+  "id": "TAG-01",
+  "area": "Tag failures",
+  "title": "Name of the wall removed",
+  "file": "tag_failures/name_removed.msh",
+  "why": "The cells still have a number, but the name 'wall' is gone, so a solver looking for 'wall' finds nothing.",
+  "input": {
+   "tags": {
+    "inlet": [
+     2,
+     null
+    ],
+    "outlet": [
+     2,
+     null
+    ],
+    "wall": [
+     2,
+     null
+    ],
+    "fluid": [
+     3,
+     null
+    ]
+   }
+  },
+  "expected": {
+   "status": "errors",
+   "findings": [
+    "TAG_MISSING",
+    "TAG_UNNAMED"
+   ]
+  }
+ },
+ {
+  "id": "TAG-02",
+  "area": "Tag failures",
+  "title": "Inlet renamed to 'inlett'",
+  "file": "tag_failures/name_misspelled.msh",
+  "why": "A typo gets past most workflows silently.",
+  "input": {
+   "tags": {
+    "inlet": [
+     2,
+     null
+    ],
+    "outlet": [
+     2,
+     null
+    ],
+    "wall": [
+     2,
+     null
+    ],
+    "fluid": [
+     3,
+     null
+    ]
+   }
+  },
+  "expected": {
+   "status": "errors",
+   "findings": [
+    "TAG_MISSING",
+    "TAG_UNEXPECTED"
+   ]
+  }
+ },
+ {
+  "id": "TAG-03",
+  "area": "Tag failures",
+  "title": "All names lost",
+  "file": "tag_failures/all_names_removed.msh",
+  "why": "A typical converter failure: numbers survive and every name is lost.",
+  "input": {
+   "tags": {
+    "inlet": [
+     2,
+     null
+    ],
+    "outlet": [
+     2,
+     null
+    ],
+    "wall": [
+     2,
+     null
+    ],
+    "fluid": [
+     3,
+     null
+    ]
+   }
+  },
+  "expected": {
+   "status": "errors",
+   "findings": [
+    "TAG_MISSING",
+    "TAG_UNNAMED"
+   ]
+  }
+ },
+ {
+  "id": "TAG-04",
+  "area": "Tag failures",
+  "title": "Wall name kept, its cells lost",
+  "file": "tag_failures/wall_cells_lost.msh",
+  "why": "The name still exists, so a simple name check would pass. The cells are gone.",
+  "input": {
+   "tags": {
+    "inlet": [
+     2,
+     null
+    ],
+    "outlet": [
+     2,
+     null
+    ],
+    "wall": [
+     2,
+     null
+    ],
+    "fluid": [
+     3,
+     null
+    ]
+   }
+  },
+  "expected": {
+   "status": "errors",
+   "findings": [
+    "TAG_EMPTY",
+    "BOUNDARY_UNTAGGED"
+   ],
+   "tags": [
+    {
+     "name": "wall",
+     "dim": 2,
+     "cells": 0,
+     "measure": 0,
+     "rel": 1e-09
+    }
+   ]
+  }
+ },
+ {
+  "id": "TAG-05",
+  "area": "Tag failures",
+  "title": "All boundary cells lost",
+  "file": "tag_failures/all_boundary_cells_lost.msh",
+  "why": "Only solid cells remain, and the boundary has no labels at all.",
+  "input": {
+   "tags": {
+    "inlet": [
+     2,
+     null
+    ],
+    "outlet": [
+     2,
+     null
+    ],
+    "wall": [
+     2,
+     null
+    ],
+    "fluid": [
+     3,
+     null
+    ]
+   }
+  },
+  "expected": {
+   "status": "errors",
+   "findings": [
+    "TAG_EMPTY",
+    "BOUNDARY_NOT_TAGGED"
+   ]
+  }
+ },
+ {
+  "id": "TAG-06",
+  "area": "Tag failures",
+  "title": "Half of the solid cells have no region",
+  "file": "tag_failures/half_of_tets_untagged.msh",
+  "why": "A solver assigning materials by tag would leave these cells without one.",
+  "input": {
+   "tags": {
+    "inlet": [
+     2,
+     null
+    ],
+    "outlet": [
+     2,
+     null
+    ],
+    "wall": [
+     2,
+     null
+    ],
+    "fluid": [
+     3,
+     null
+    ]
+   }
+  },
+  "expected": {
+   "status": "errors",
+   "findings": [
+    "DOMAIN_UNTAGGED"
+   ]
+  }
+ },
+ {
+  "id": "TAG-07",
+  "area": "Tag failures",
+  "title": "Inlet labelled as a curve instead of a surface",
+  "file": "tag_failures/tag_has_wrong_dimension.msh",
+  "why": "The name exists, but in the wrong dimension, so a surface lookup fails.",
+  "input": {
+   "tags": {
+    "inlet": [
+     2,
+     null
+    ],
+    "outlet": [
+     2,
+     null
+    ],
+    "wall": [
+     2,
+     null
+    ],
+    "fluid": [
+     3,
+     null
+    ]
+   }
+  },
+  "expected": {
+   "status": "errors",
+   "findings": [
+    "TAG_WRONG_DIMENSION",
+    "TAG_UNNAMED"
+   ]
+  }
+ },
+ {
+  "id": "TAG-08",
+  "area": "Tag failures",
+  "title": "Boundary triangle attached to nothing",
+  "file": "tag_failures/floating_boundary_triangle.msh",
+  "why": "Its boundary condition would act on nothing.",
+  "input": {
+   "tags": {
+    "inlet": [
+     2,
+     null
+    ],
+    "outlet": [
+     2,
+     null
+    ],
+    "wall": [
+     2,
+     null
+    ],
+    "fluid": [
+     3,
+     null
+    ]
+   }
+  },
+  "expected": {
+   "status": "errors",
+   "findings": [
+    "FLOATING_FACETS"
+   ]
+  }
+ },
+ {
+  "id": "TAG-09",
+  "area": "Tag failures",
+  "title": "Inlet and wall swapped",
+  "file": "tag_failures/inlet_and_wall_swapped.msh",
+  "why": "All names exist, so only comparing sizes can reveal this: the 'inlet' measures 8 pi instead of pi.",
+  "input": {
+   "tags": {
+    "inlet": [
+     2,
+     3.141592653589793
+    ],
+    "outlet": [
+     2,
+     3.141592653589793
+    ],
+    "wall": [
+     2,
+     25.132741228718345
+    ],
+    "fluid": [
+     3,
+     12.566370614359172
+    ]
+   },
+   "volume": 12.566370614359172,
+   "rel_tol": 0.08
+  },
+  "expected": {
+   "status": "errors",
+   "findings": [
+    "MEASURE_MISMATCH"
+   ]
+  }
+ },
+ {
+  "id": "TAG-10",
+  "area": "Tag failures",
+  "title": "The same swap, with no sizes given",
+  "file": "tag_failures/inlet_and_wall_swapped.msh",
+  "why": "Shows why stating sizes matters. Without them, this swap can't be detected, and the tool must not claim otherwise.",
+  "input": {
+   "tags": {
+    "inlet": [
+     2,
+     null
+    ],
+    "outlet": [
+     2,
+     null
+    ],
+    "wall": [
+     2,
+     null
+    ],
+    "fluid": [
+     3,
+     null
+    ]
+   }
+  },
+  "expected": {
+   "status": "no_problems_found",
+   "findings": []
+  }
+ },
+ {
+  "id": "ELM-01",
+  "area": "Element and connection problems",
+  "title": "Inside-out tetrahedron",
+  "file": "defects/inverted_tet.msh",
+  "why": "Swapping two corners makes the volume -1/6. Its total must be marked as untrusted.",
+  "input": {},
+  "expected": {
+   "status": "errors",
+   "findings": [
+    "INVERTED_CELLS"
+   ],
+   "volume": {
+    "value": -0.16666666666666666,
+    "rel": 1e-09,
+    "trusted": false
+   }
+  }
+ },
+ {
+  "id": "ELM-02",
+  "area": "Element and connection problems",
+  "title": "Tetrahedron with all corners in one plane",
+  "file": "defects/degenerate_coplanar_tet.msh",
+  "why": "Zero volume. FEM divides by cell size, so this could produce infinities.",
+  "input": {},
+  "expected": {
+   "status": "errors",
+   "findings": [
+    "DEGENERATE_CELLS"
+   ],
+   "volume": {
+    "value": 0,
+    "rel": 1
+   }
+  }
+ },
+ {
+  "id": "ELM-03",
+  "area": "Element and connection problems",
+  "title": "Tetrahedron using one corner twice",
+  "file": "defects/degenerate_repeated_node.msh",
+  "why": "Only three distinct corners, so it has no volume. The fourth point is then unused, which is noted too.",
+  "input": {},
+  "expected": {
+   "status": "errors",
+   "findings": [
+    "DEGENERATE_CELLS",
+    "ORPHAN_POINTS"
+   ]
+  }
+ },
+ {
+  "id": "ELM-04",
+  "area": "Element and connection problems",
+  "title": "Extremely flat tetrahedron",
+  "file": "defects/sliver_tet.msh",
+  "why": "Valid but nearly flat: height 0.0001, volume 0.0001/6. A warning, since it isn't strictly broken.",
+  "input": {},
+  "expected": {
+   "status": "warnings",
+   "findings": [
+    "LOW_QUALITY_CELLS"
+   ],
+   "volume": {
+    "value": 1.6666666666666667e-05,
+    "rel": 1e-06,
+    "trusted": true
+   }
+  }
+ },
+ {
+  "id": "ELM-05",
+  "area": "Element and connection problems",
+  "title": "The same cell listed twice",
+  "file": "defects/duplicate_tet.msh",
+  "why": "A solver would count its stiffness twice. Volume reads 1/3 instead of 1/6.",
+  "input": {},
+  "expected": {
+   "status": "errors",
+   "findings": [
+    "DUPLICATE_CELLS"
+   ],
+   "volume": {
+    "value": 0.3333333333333333,
+    "rel": 1e-09
+   }
+  }
+ },
+ {
+  "id": "ELM-06",
+  "area": "Element and connection problems",
+  "title": "Crack from a duplicated point",
+  "file": "defects/crack_duplicate_node.msh",
+  "why": "Two cells look joined, but use separate copies of one corner, so heat can't flow across.",
+  "input": {},
+  "expected": {
+   "status": "warnings",
+   "findings": [
+    "DUPLICATE_POINTS"
+   ],
+   "n_points": 6
+  }
+ },
+ {
+  "id": "ELM-07",
+  "area": "Element and connection problems",
+  "title": "Point used by no cell",
+  "file": "defects/orphan_node.msh",
+  "why": "Usually harmless, so it's only information, and the status stays clean.",
+  "input": {},
+  "expected": {
+   "status": "no_problems_found",
+   "findings": [
+    "ORPHAN_POINTS"
+   ]
+  }
+ },
+ {
+  "id": "ELM-08",
+  "area": "Element and connection problems",
+  "title": "Two separate pieces",
+  "file": "defects/two_separate_pieces.msh",
+  "why": "A floating piece needs its own boundary conditions, or the problem can't be solved.",
+  "input": {},
+  "expected": {
+   "status": "warnings",
+   "findings": [
+    "MULTIPLE_COMPONENTS"
+   ],
+   "volume": {
+    "value": 0.3333333333333333,
+    "rel": 1e-09
+   }
+  }
+ },
+ {
+  "id": "ELM-09",
+  "area": "Element and connection problems",
+  "title": "One face shared by three tetrahedra",
+  "file": "defects/face_shared_by_three_tets.msh",
+  "why": "A face can only have two sides, so these cells must overlap.",
+  "input": {},
+  "expected": {
+   "status": "errors",
+   "findings": [
+    "NONMANIFOLD_FACES"
+   ]
+  }
+ },
+ {
+  "id": "ELM-10",
+  "area": "Element and connection problems",
+  "title": "2D mesh with one triangle flipped",
+  "file": "defects/2d_mixed_orientation.msh",
+  "why": "A mesh entirely clockwise is fine, as it's merely viewed from behind. A mix isn't.",
+  "input": {},
+  "expected": {
+   "status": "errors",
+   "findings": [
+    "INVERTED_CELLS"
+   ],
+   "area": {
+    "value": 1,
+    "rel": 1e-09
+   }
+  }
+ },
+ {
+  "id": "ELM-11",
+  "area": "Element and connection problems",
+  "title": "File with points but no cells",
+  "file": "defects/points_only.msh",
+  "why": "Nothing can be checked, so 'no problems found' would be seriously misleading.",
+  "input": {},
+  "expected": {
+   "status": "errors",
+   "findings": [
+    "EMPTY_MESH"
+   ]
+  }
+ },
+ {
+  "id": "SRF-01",
+  "area": "Surface problems",
+  "title": "Cube with one side missing",
+  "file": "defects/cube_missing_two_faces.stl",
+  "why": "Area = 600 - 100 = 500. Its 'volume' depends on where the mesh sits, so it must be untrusted.",
+  "input": {},
+  "expected": {
+   "status": "warnings",
+   "findings": [
+    "OPEN_SURFACE"
+   ],
+   "area": {
+    "value": 500,
+    "rel": 1e-09
+   },
+   "volume": {
+    "trusted": false,
+    "reason_contains": "open surface"
+   }
+  }
+ },
+ {
+  "id": "SRF-02",
+  "area": "Surface problems",
+  "title": "Cube with one triangle flipped",
+  "file": "defects/cube_one_flipped_face.stl",
+  "why": "Every edge still has two triangles, so it passes a simple watertight test, yet the volume is wrong.",
+  "input": {},
+  "expected": {
+   "status": "errors",
+   "findings": [
+    "WINDING_INCONSISTENT"
+   ],
+   "area": {
+    "value": 600,
+    "rel": 1e-09
+   },
+   "volume": {
+    "trusted": false,
+    "reason_contains": "winding"
+   }
+  }
+ },
+ {
+  "id": "SRF-03",
+  "area": "Surface problems",
+  "title": "Cube turned inside out",
+  "file": "defects/cube_inside_out.stl",
+  "why": "All faces point inward, so volume = -1000.",
+  "input": {},
+  "expected": {
+   "status": "warnings",
+   "findings": [
+    "SURFACE_INVERTED"
+   ],
+   "volume": {
+    "value": -1000,
+    "rel": 1e-09,
+    "trusted": false
+   }
+  }
+ },
+ {
+  "id": "SRF-04",
+  "area": "Surface problems",
+  "title": "Cube with an extra fin",
+  "file": "defects/cube_with_fin.stl",
+  "why": "An edge touched by three triangles has no clear inside. The fin's own edges are also open. Area = 600 + 35.355.",
+  "input": {},
+  "expected": {
+   "status": "errors",
+   "findings": [
+    "NONMANIFOLD_EDGES",
+    "OPEN_SURFACE"
+   ],
+   "area": {
+    "value": 635.3553390593274,
+    "rel": 1e-06
+   },
+   "volume": {
+    "trusted": false
+   }
+  }
+ },
+ {
+  "id": "SRF-05",
+  "area": "Surface problems",
+  "title": "Two separate cubes",
+  "file": "defects/two_cubes.stl",
+  "why": "Volume = 2000, area = 1200. Volume is valid, but two pieces are worth a warning.",
+  "input": {},
+  "expected": {
+   "status": "warnings",
+   "findings": [
+    "MULTIPLE_COMPONENTS"
+   ],
+   "volume": {
+    "value": 2000,
+    "rel": 1e-09,
+    "trusted": true
+   },
+   "area": {
+    "value": 1200,
+    "rel": 1e-09
+   }
+  }
+ },
+ {
+  "id": "SRF-06",
+  "area": "Surface problems",
+  "title": "Text STL with no closing line",
+  "file": "defects/cube_no_endsolid.stl",
+  "why": "A file cut off between triangles could look complete, so the reader must say something's off.",
+  "input": {},
+  "expected": {
+   "status": "no_problems_found",
+   "findings": [],
+   "notes_contain": "endsolid"
+  }
+ },
+ {
+  "id": "UNT-01",
+  "area": "Sizes and units",
+  "title": "Millimetres read as metres",
+  "file": "valid/cube_10mm.stl",
+  "why": "Expected 0.01 long, measured 10: 1000 times too large.",
+  "input": {
+   "size": 0.01
+  },
+  "expected": {
+   "status": "errors",
+   "findings": [
+    "UNIT_SCALE_MISMATCH"
+   ],
+   "message_contains": "1000"
+  }
+ },
+ {
+  "id": "UNT-02",
+  "area": "Sizes and units",
+  "title": "Millimetres read as inches",
+  "file": "valid/cube_10mm.stl",
+  "why": "Expected 10/25.4 = 0.3937, measured 10: 25.4 times too large.",
+  "input": {
+   "size": 0.3937007874015748
+  },
+  "expected": {
+   "status": "errors",
+   "findings": [
+    "UNIT_SCALE_MISMATCH"
+   ],
+   "message_contains": "25.4"
+  }
+ },
+ {
+  "id": "UNT-03",
+  "area": "Sizes and units",
+  "title": "Volume off by a billion",
+  "file": "valid/cube_10mm.stl",
+  "why": "Measured 1000, expected 0.000001: a ratio of 1e9, the cube of 1000, so still one unit mistake.",
+  "input": {
+   "volume": 1e-06
+  },
+  "expected": {
+   "status": "errors",
+   "findings": [
+    "UNIT_SCALE_MISMATCH"
+   ],
+   "message_contains": "1000"
+  }
+ },
+ {
+  "id": "UNT-04",
+  "area": "Sizes and units",
+  "title": "Metres when millimetres were expected",
+  "file": "valid/cube_10mm.stl",
+  "why": "Expected 10000, measured 10: 1000 times too small.",
+  "input": {
+   "size": 10000
+  },
+  "expected": {
+   "status": "errors",
+   "findings": [
+    "UNIT_SCALE_MISMATCH"
+   ],
+   "message_contains": "too small"
+  }
+ },
+ {
+  "id": "UNT-05",
+  "area": "Sizes and units",
+  "title": "Different size that isn't a unit mistake",
+  "file": "valid/cube_10mm.stl",
+  "why": "Expected 7, measured 10. No common unit gives this ratio.",
+  "input": {
+   "size": 7
+  },
+  "expected": {
+   "status": "errors",
+   "findings": [
+    "MEASURE_MISMATCH"
+   ]
+  }
+ },
+ {
+  "id": "UNT-06",
+  "area": "Sizes and units",
+  "title": "Just inside the tolerance",
+  "file": "valid/cube_10mm.stl",
+  "why": "Expected 594.1, measured 600: a difference of 0.993% with a 1% limit.",
+  "input": {
+   "area": 594.1,
+   "rel_tol": 0.01
+  },
+  "expected": {
+   "status": "no_problems_found",
+   "findings": []
+  }
+ },
+ {
+  "id": "UNT-07",
+  "area": "Sizes and units",
+  "title": "Just outside the tolerance",
+  "file": "valid/cube_10mm.stl",
+  "why": "Expected 590, measured 600: a difference of 1.69% with a 1% limit.",
+  "input": {
+   "area": 590,
+   "rel_tol": 0.01
+  },
+  "expected": {
+   "status": "errors",
+   "findings": [
+    "MEASURE_MISMATCH"
+   ]
+  }
+ },
+ {
+  "id": "UNT-08",
+  "area": "Sizes and units",
+  "title": "Loose tolerance accepts the same value",
+  "file": "valid/cube_10mm.stl",
+  "why": "The same 1.69% difference with a 2% limit passes.",
+  "input": {
+   "area": 590,
+   "rel_tol": 0.02
+  },
+  "expected": {
+   "status": "no_problems_found",
+   "findings": []
+  }
+ },
+ {
+  "id": "UNT-09",
+  "area": "Sizes and units",
+  "title": "Expected volume of zero",
+  "file": "valid/cube_10mm.stl",
+  "why": "A zero expectation mustn't cause a division by zero.",
+  "input": {
+   "volume": 0
+  },
+  "expected": {
+   "status": "errors",
+   "findings": [
+    "MEASURE_MISMATCH"
+   ]
+  }
+ },
+ {
+  "id": "UNT-10",
+  "area": "Sizes and units",
+  "title": "Asking an STL file for a tag",
+  "file": "valid/cube_10mm.stl",
+  "why": "STL has no tags, so an expected one must be reported as missing.",
+  "input": {
+   "tags": {
+    "wall": [
+     2,
+     null
+    ]
+   }
+  },
+  "expected": {
+   "status": "errors",
+   "findings": [
+    "TAG_MISSING"
+   ]
+  }
+ },
+ {
+  "id": "LIM-01",
+  "area": "Known limits",
+  "title": "Hexahedra only",
+  "file": "limits/hex_only.msh",
+  "why": "Hexahedra aren't analysed. The report must say so, not imply that the mesh passed.",
+  "input": {},
+  "expected": {
+   "status": "errors",
+   "findings": [
+    "UNSUPPORTED_ELEMENTS",
+    "EMPTY_MESH"
+   ],
+   "skipped_elements": {
+    "8-node hexahedron": 1
+   }
+  }
+ },
+ {
+  "id": "LIM-02",
+  "area": "Known limits",
+  "title": "Tetrahedron plus hexahedron",
+  "file": "limits/tet_and_hex.msh",
+  "why": "Only the tetrahedron is counted, so the volume is too low and must be marked untrusted. The hexahedron's corners look unused.",
+  "input": {},
+  "expected": {
+   "status": "warnings",
+   "findings": [
+    "UNSUPPORTED_ELEMENTS",
+    "ORPHAN_POINTS"
+   ],
+   "volume": {
+    "value": 0.16666666666666666,
+    "rel": 1e-09,
+    "trusted": false
+   }
+  }
+ },
+ {
+  "id": "LIM-03",
+  "area": "Known limits",
+  "title": "Second-order Gmsh mesh",
+  "file": "limits/cylinder_second_order.msh",
+  "why": "Curved elements aren't analysed, and the report must say so.",
+  "input": {},
+  "expected": {
+   "status": "errors",
+   "findings": [
+    "UNSUPPORTED_ELEMENTS",
+    "EMPTY_MESH"
+   ]
+  }
+ },
+ {
+  "id": "LIM-04",
+  "area": "Known limits",
+  "title": "Inlet and outlet swapped, same size",
+  "file": "limits/inlet_and_outlet_swapped_equal_size.msh",
+  "why": "KNOWN GAP: equal sizes can't separate them, so this goes undetected, as documented in the README.",
+  "input": {
+   "tags": {
+    "inlet": [
+     2,
+     3.141592653589793
+    ],
+    "outlet": [
+     2,
+     3.141592653589793
+    ],
+    "wall": [
+     2,
+     25.132741228718345
+    ],
+    "fluid": [
+     3,
+     12.566370614359172
+    ]
+   },
+   "volume": 12.566370614359172,
+   "rel_tol": 0.08
+  },
+  "expected": {
+   "status": "no_problems_found",
+   "findings": []
+  }
+ },
+ {
+  "id": "LIM-05",
+  "area": "Known limits",
+  "title": "Flat 2D mesh not in the xy plane",
+  "file": "limits/flat_mesh_in_xz_plane.msh",
+  "why": "KNOWN GAP: only meshes of constant z are recognised as 2D. This reads as an open surface.",
+  "input": {},
+  "expected": {
+   "status": "warnings",
+   "findings": [
+    "OPEN_SURFACE"
+   ],
+   "domain": "surface",
+   "area": {
+    "value": 1,
+    "rel": 1e-09
+   }
+  }
+ },
+ {
+  "id": "BAD-01",
+  "area": "Damaged files",
+  "title": "Empty file",
+  "file": "corrupt/empty_file.msh",
+  "why": "A bad file must produce a clear message, so a partial mesh is never mistaken for a whole one.",
+  "input": {},
+  "expected": {
+   "error": "not a Gmsh"
+  }
+ },
+ {
+  "id": "BAD-02",
+  "area": "Damaged files",
+  "title": "Text file named .msh",
+  "file": "corrupt/not_a_mesh.msh",
+  "why": "A bad file must produce a clear message, so a partial mesh is never mistaken for a whole one.",
+  "input": {},
+  "expected": {
+   "error": "not a Gmsh"
+  }
+ },
+ {
+  "id": "BAD-03",
+  "area": "Damaged files",
+  "title": "Binary Gmsh file",
+  "file": "corrupt/binary_flag.msh",
+  "why": "A bad file must produce a clear message, so a partial mesh is never mistaken for a whole one.",
+  "input": {},
+  "expected": {
+   "error": "binary"
+  }
+ },
+ {
+  "id": "BAD-04",
+  "area": "Damaged files",
+  "title": "Old format version 3",
+  "file": "corrupt/unsupported_version.msh",
+  "why": "A bad file must produce a clear message, so a partial mesh is never mistaken for a whole one.",
+  "input": {},
+  "expected": {
+   "error": "not supported"
+  }
+ },
+ {
+  "id": "BAD-05",
+  "area": "Damaged files",
+  "title": "Incomplete format line",
+  "file": "corrupt/header_too_short.msh",
+  "why": "A bad file must produce a clear message, so a partial mesh is never mistaken for a whole one.",
+  "input": {},
+  "expected": {
+   "error": "damaged"
+  }
+ },
+ {
+  "id": "BAD-06",
+  "area": "Damaged files",
+  "title": "No points or cells at all",
+  "file": "corrupt/no_nodes_section.msh",
+  "why": "A bad file must produce a clear message, so a partial mesh is never mistaken for a whole one.",
+  "input": {},
+  "expected": {
+   "error": "no $Nodes"
+  }
+ },
+ {
+  "id": "BAD-07",
+  "area": "Damaged files",
+  "title": "Cell uses a point that doesn't exist",
+  "file": "corrupt/unknown_node_reference.msh",
+  "why": "A bad file must produce a clear message, so a partial mesh is never mistaken for a whole one.",
+  "input": {},
+  "expected": {
+   "error": "not in $Nodes"
+  }
+ },
+ {
+  "id": "BAD-08",
+  "area": "Damaged files",
+  "title": "A coordinate isn't a number",
+  "file": "corrupt/bad_number.msh",
+  "why": "A bad file must produce a clear message, so a partial mesh is never mistaken for a whole one.",
+  "input": {},
+  "expected": {
+   "error": "damaged"
+  }
+ },
+ {
+  "id": "BAD-09",
+  "area": "Damaged files",
+  "title": "A coordinate is 'nan'",
+  "file": "corrupt/nan_coordinate.msh",
+  "why": "A bad file must produce a clear message, so a partial mesh is never mistaken for a whole one.",
+  "input": {},
+  "expected": {
+   "error": "finite"
+  }
+ },
+ {
+  "id": "BAD-10",
+  "area": "Damaged files",
+  "title": "A coordinate is 'inf'",
+  "file": "corrupt/inf_coordinate.msh",
+  "why": "A bad file must produce a clear message, so a partial mesh is never mistaken for a whole one.",
+  "input": {},
+  "expected": {
+   "error": "finite"
+  }
+ },
+ {
+  "id": "BAD-11",
+  "area": "Damaged files",
+  "title": "File cut off before its end marker",
+  "file": "corrupt/truncated_no_end_marker.msh",
+  "why": "A bad file must produce a clear message, so a partial mesh is never mistaken for a whole one.",
+  "input": {},
+  "expected": {
+   "error": "damaged"
+  }
+ },
+ {
+  "id": "BAD-12",
+  "area": "Damaged files",
+  "title": "Fewer cells than the file declares",
+  "file": "corrupt/fewer_elements_than_declared.msh",
+  "why": "A bad file must produce a clear message, so a partial mesh is never mistaken for a whole one.",
+  "input": {},
+  "expected": {
+   "error": "damaged"
+  }
+ },
+ {
+  "id": "BAD-13",
+  "area": "Damaged files",
+  "title": "Fewer points than the file declares",
+  "file": "corrupt/fewer_nodes_than_declared.msh",
+  "why": "A bad file must produce a clear message, so a partial mesh is never mistaken for a whole one.",
+  "input": {},
+  "expected": {
+   "error": "damaged"
+  }
+ },
+ {
+  "id": "BAD-14",
+  "area": "Damaged files",
+  "title": "Format 4.1 with missing cells",
+  "file": "corrupt/v41_truncated_elements.msh",
+  "why": "A bad file must produce a clear message, so a partial mesh is never mistaken for a whole one.",
+  "input": {},
+  "expected": {
+   "error": "damaged"
+  }
+ },
+ {
+  "id": "BAD-15",
+  "area": "Damaged files",
+  "title": "Tetrahedron with three corners",
+  "file": "corrupt/wrong_corner_count.msh",
+  "why": "A bad file must produce a clear message, so a partial mesh is never mistaken for a whole one.",
+  "input": {},
+  "expected": {
+   "error": "damaged"
+  }
+ },
+ {
+  "id": "BAD-16",
+  "area": "Damaged files",
+  "title": "STL with no triangles",
+  "file": "corrupt/empty_ascii.stl",
+  "why": "A bad file must produce a clear message, so a partial mesh is never mistaken for a whole one.",
+  "input": {},
+  "expected": {
+   "error": "no triangles"
+  }
+ },
+ {
+  "id": "BAD-17",
+  "area": "Damaged files",
+  "title": "Text file named .stl",
+  "file": "corrupt/not_an_stl.stl",
+  "why": "A bad file must produce a clear message, so a partial mesh is never mistaken for a whole one.",
+  "input": {},
+  "expected": {
+   "error": "not a valid"
+  }
+ },
+ {
+  "id": "BAD-18",
+  "area": "Damaged files",
+  "title": "STL with two corners in a triangle",
+  "file": "corrupt/odd_corner_count.stl",
+  "why": "A bad file must produce a clear message, so a partial mesh is never mistaken for a whole one.",
+  "input": {},
+  "expected": {
+   "error": "multiple of three"
+  }
+ },
+ {
+  "id": "BAD-19",
+  "area": "Damaged files",
+  "title": "STL with a 'nan' coordinate",
+  "file": "corrupt/nan_vertex.stl",
+  "why": "A bad file must produce a clear message, so a partial mesh is never mistaken for a whole one.",
+  "input": {},
+  "expected": {
+   "error": "finite"
+  }
+ },
+ {
+  "id": "BAD-20",
+  "area": "Damaged files",
+  "title": "Binary STL cut off part way",
+  "file": "corrupt/truncated_binary.stl",
+  "why": "A bad file must produce a clear message, so a partial mesh is never mistaken for a whole one.",
+  "input": {},
+  "expected": {
+   "error": "not a valid"
+  }
+ },
+ {
+  "id": "BAD-21",
+  "area": "Damaged files",
+  "title": "Unsupported file type",
+  "file": "corrupt/unknown_extension.xyz",
+  "why": "A bad file must produce a clear message, so a partial mesh is never mistaken for a whole one.",
+  "input": {},
+  "expected": {
+   "error": "Unsupported"
+  }
+ }
+]
