@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>meshpreflight</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <h1>meshpreflight</h1>
+      <p>Check a finite element mesh before you trust a simulation.</p>
+      <nav role="tablist" aria-label="Sections">
+        <button role="tab" class="tab active" data-tab="demo" aria-selected="true">Try a demo</button>
+        <button role="tab" class="tab" data-tab="file" aria-selected="false">Check my file</button>
+        <button role="tab" class="tab" data-tab="validation" aria-selected="false">Is this tool right?</button>
+        <button role="tab" class="tab" data-tab="checks" aria-selected="false">What gets checked</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="tab-demo" class="panel">
+      <form id="demo-form" class="card controls">
+        <p class="lede">Pick a shape with known exact answers, then damage it on purpose and see what gets caught.</p>
+        <div class="row">
+          <label>Shape <select id="demo-shape"></select></label>
+          <label>Refinement level <input id="demo-level" type="number" value="2" min="1" max="5"></label>
+          <label>Plant a defect <select id="demo-defect"></select></label>
+        </div>
+        <p id="demo-defect-label" class="muted"></p>
+        <div class="row">
+          <button type="submit" class="primary">Run check</button>
+          <a id="demo-download" class="secondary" href="#">Download as .msh</a>
+        </div>
+      </form>
+    </section>
+
+    <section id="tab-file" class="panel" hidden>
+      <form id="file-form" class="card controls">
+        <p class="lede">Upload a Gmsh <code>.msh</code> (ASCII, version 2.2 or 4.1) or an <code>.stl</code>. It stays on this computer.</p>
+        <label>Mesh file <input id="file-input" type="file" accept=".msh,.stl" required></label>
+        <h3>What should be true? <span class="muted">Optional, and the more you state, the more can be caught.</span></h3>
+        <table class="tag-editor">
+          <thead><tr><th>Tag name</th><th>Dimension</th><th>Expected size</th><th></th></tr></thead>
+          <tbody id="tag-rows"></tbody>
+        </table>
+        <button type="button" id="add-tag" class="secondary">Add a tag</button>
+        <div class="row">
+          <label>Expected volume <input id="exp-volume" type="number" step="any" min="0"></label>
+          <label>Expected area <input id="exp-area" type="number" step="any" min="0"></label>
+          <label>Largest dimension <input id="exp-size" type="number" step="any" min="0"></label>
+          <label>Tolerance <input id="exp-tol" type="number" step="any" min="0" value="0.01"></label>
+        </div>
+        <div class="row"><button type="submit" class="primary">Check file</button></div>
+      </form>
+    </section>
+
+    <section id="tab-validation" class="panel" hidden>
+      <div class="card">
+        <p class="lede">A checker has to earn trust. These tests compare the code with answers that don't come from the code: formulas, textbook error rates and planted defects.</p>
+        <button id="run-validation" class="primary">Run validation</button>
+        <div id="validation-output" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section id="tab-checks" class="panel" hidden>
+      <div class="card"><div id="check-list"></div></div>
+    </section>
+
+    <p id="status" class="status" role="status" aria-live="polite"></p>
+    <section id="results" hidden>
+      <div id="verdict" class="verdict"></div>
+      <div class="stats" id="stats"></div>
+      <div class="card">
+        <h2>Findings</h2>
+        <div id="findings"></div>
+      </div>
+      <div class="card">
+        <h2>3D view</h2>
+        <p class="muted">Drag to rotate, scroll to zoom. Click a legend item to hide it. Red marks problems.</p>
+        <div id="mesh-plot" class="plot"></div>
+      </div>
+      <div class="card">
+        <h2>Tags</h2>
+        <div class="scroll"><table id="tag-table"></table></div>
+        <div id="tag-plot" class="plot"></div>
+      </div>
+      <div class="card">
+        <h2>Element quality</h2>
+        <label>Metric <select id="quality-metric"></select></label>
+        <p id="quality-meaning" class="muted"></p>
+        <div id="quality-plot" class="plot"></div>
+      </div>
+      <div class="card">
+        <h2>Coverage</h2>
+        <p id="coverage" class="muted"></p>
+        <ul id="skipped"></ul>
+      </div>
+    </section>
+  </main>
+
+  <script src="{{ url_for('plotly_js') }}"></script>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
